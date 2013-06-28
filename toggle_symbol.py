@@ -20,6 +20,8 @@ class ToggleSymbolCommand(sublime_plugin.TextCommand):
 
     if old_quotes == ':':
       text = '\'' + text + '\''
+    elif old_quotes == '\'':
+      text = '"' + text + '"'
     else :
       text = ':' + text
 
@@ -37,7 +39,7 @@ class ToggleSymbolCommand(sublime_plugin.TextCommand):
     for sel in v.sel():
         text = v.substr(sel)
         res = self.matcher(text)
-        
+
         if not res:
           #first check one character to the left to see if its a symbol
           sel = Region(sel.begin() - 1, sel.end())
